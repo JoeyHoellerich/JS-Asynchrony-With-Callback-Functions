@@ -5,7 +5,13 @@ const pc = newPlayableCharacter(100, 110)
 const npc = newNonPlayableCharacter(50, 300)
 
 // have the NPC start walking east immediately
-npc.walkEast()
+npc.walkNorth(1400, 
+    () => npc.walkEast(1200,
+        () => npc.walkSouth(300,
+            () => npc.walkEast(1500,
+                 () => npc.walkSouth(1500,
+                    () => npc.walkWest(2700, 
+                        () => npc.walkNorth(400)))))))
 
 // Create the inventory
 const inventory = newInventory()
@@ -20,3 +26,17 @@ move(newImage('assets/well.png')).to(500, 575)
 move(newItem('assets/sword.png')).to(500, 555)
 move(newItem('assets/shield.png')).to(165, 335)
 move(newItem('assets/staff.png')).to(600, 250)
+
+function collisionTest(){
+    let playablePosX = pc.element.getBoundingClientRect().x;
+    let playablePosY = pc.element.getBoundingClientRect().y;
+    
+    let nonPlayablePosX = npc.element.getBoundingClientRect().x;
+    let nonPlayablePosY = npc.element.getBoundingClientRect().y;
+    
+    if (Math.abs(playablePosX - nonPlayablePosX) < 40 && Math.abs(playablePosY - nonPlayablePosY) < 40){
+        pc.element.style.display = "none";
+    }
+}
+
+setInterval(collisionTest, 1);
