@@ -33,8 +33,12 @@ function collisionTest(){
     
     let nonPlayablePosX = npc.element.getBoundingClientRect().x;
     let nonPlayablePosY = npc.element.getBoundingClientRect().y;
+
+    let widthHitBox = npc.element.width/2 + pc.element.width/2;
+    let heighHitBox = npc.element.height/2 + pc.element.height/2;
+
     
-    if (Math.abs(playablePosX - nonPlayablePosX) < 40 && Math.abs(playablePosY - nonPlayablePosY) < 40){
+    if (Math.abs(playablePosX - nonPlayablePosX) < widthHitBox && Math.abs(playablePosY - nonPlayablePosY) < heighHitBox){
         pc.element.style.display = "none";
     }
 }
